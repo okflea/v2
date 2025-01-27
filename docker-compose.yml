@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  service1:
+    build: ./service1
+    container_name: service1
+    # If you want to expose the service to your host directly (for debugging), map it:
+    ports:
+      - "3009:3001"
+    environment:
+      - SERVICE1_PORT=3001
+    networks:
+      - microservices-network
+
+  service2:
+    build: ./service2
+    container_name: service2
+    ports:
+      - "3008:3002"
+    environment:
+      - SERVICE2_PORT=3002
+    networks:
+      - microservices-network
+
+  gateway:
+    build: ./gateway
+    container_name: nginx_gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - service1
+      - service2
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
