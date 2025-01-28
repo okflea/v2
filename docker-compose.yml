@@ -4,6 +4,7 @@ services:
   service1:
     build:
       context: ./service1
+      # dockerfile: Dockerfile   # (If your Dockerfile is named just 'Dockerfile', no need to specify)
     ports:
       - "3009:3001"
     env_file:
