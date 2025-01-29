@@ -20,6 +20,7 @@ yarn-error.log*
 
 # Environment variables
 .env
+.env.prod
 
 # Editor directories and files
 .idea/
