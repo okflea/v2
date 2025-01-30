@@ -1,7 +1,6 @@
 import { Worker, WorkerOptions, Job } from 'bullmq';
-import { UserModel } from '../models';
-import { modelMap } from '../models/modelMap';
-import { DBCreateMessage, DBDeleteMessage, DBGetMessage, DBMessage, DBUpdateMessage } from '../types/dbOps';
+import { DBCreateMessage, DBDeleteMessage, DBGetMessage, DBMessage, DBUpdateMessage } from '../../types/dbOps';
+import { modelMap } from '../modelMap';
 
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
@@ -20,8 +19,6 @@ export const dbOpsWorker = new Worker<DBMessage>(
   'dbOps',
   async (job: Job<DBMessage>) => {
     console.log(`[Worker] Received job => ${job.id}`);
-    console.log(`[Worker] Received job => ${job}`);
-
 
     const {
       operation,
@@ -103,23 +100,3 @@ dbOpsWorker.on('failed', (job, err) => {
 });
 
 
-
-
-// const dbOpsWorker = new Worker<DBMessage, boolean>(
-//   'dbOps',
-//   async job => {
-//     // Will print { foo: 'bar'} for the first job
-//     // and { qux: 'baz' } for the second.
-//     console.log(job.data);
-//     return true
-//   },
-//   {
-//     connection: {
-//       host: 'redis',
-//       port: 6379
-//     },
-//     autorun:false
-//   },
-// );
-//
-// export { dbOpsWorker };
