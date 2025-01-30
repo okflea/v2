@@ -22,6 +22,11 @@ yarn-error.log*
 .env
 .env.prod
 
+/service1/.env
+/service1/.env.prod
+/service2/.env
+/service2/.env.prod
+
 # Editor directories and files
 .idea/
 .vscode/
