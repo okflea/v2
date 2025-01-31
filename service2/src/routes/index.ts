@@ -20,16 +20,16 @@ router.get('/', async (ctx) => {
   // };
 
   const message: DBMessage = {
-    operation: 'CREATE',
-    collection: 'users',
-    data: { name: "hoho", email: "as@as.com" },
-    options: { fields: ['name', 'email'] },
-    requestId: 'req-0005',
-    timestamp: Date.now()
-  };
+    "operation": "GET",
+    "collection": "User",
+    "data": { "name": "admin" },
+    "options": { "fields": ["name", "email"] },
+    "requestId": "req-0001",
+    "timestamp": Date.now()
+  }
+    ;
 
   const job = await dbOpsQueue.add('dbOps', message);
-
 
   ctx.body = 'Hello from Service 2 (Koa + Socket.IO)';
 });

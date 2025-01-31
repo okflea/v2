@@ -18,7 +18,7 @@ app.get('/', (req: Request, res: Response) => {
     const response = {
         uptime: os.uptime(),
         timestamp: new Date().toISOString(),
-        message: 'Server is running'
+        message: 'api Server is running'
     };
     res.json(response);
 });

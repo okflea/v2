@@ -15,7 +15,7 @@ const workerOptions: WorkerOptions = {
 /**
  * dbOpsWorker processes DBMessage jobs using Mongoose.
  */
-export const dbOpsWorker = new Worker<DBMessage>(
+export const dbOpsWorker = new Worker<DBMessage,any>(
   'dbOps',
   async (job: Job<DBMessage>) => {
     console.log(`[Worker] Received job => ${job.id}`);
