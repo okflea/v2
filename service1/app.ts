@@ -1,18 +1,32 @@
-import { config } from "./src/config/config";
-import connectDB from "./src/config/db"
-import { dbOpsWorker } from "./src/modules/dbOpsWorker/dbOps";
-import { server } from "./src/server";
-import { initializeSystem } from "./src/utils/init";
+import express, { Request, Response } from 'express';
+import { createServer } from "http";
+import os from 'os';
+import moduleRoutes from './modules';
+import cookieParser from 'cookie-parser';
+import cors from 'cors'
+import { errorHandler } from './middlewares';
 
-const startServer = async () => {
+const app = express();
 
-  await connectDB();
-  await initializeSystem();
-  await dbOpsWorker.run()
+// Middleware for parsing JSON
+app.use(express.json());
+app.use(cookieParser())
+app.use(cors())
 
-  server.listen(config.port, () => {
-    console.log(`API Service listening on port ${config.port}`);
-  })
-}
 
-startServer()
+app.get('/', (req: Request, res: Response) => {
+    const response = {
+        uptime: os.uptime(),
+        timestamp: new Date().toISOString(),
+        message: 'Server is running'
+    };
+    res.json(response);
+});
+
+app.use('/api', moduleRoutes);
+
+
+app.use(errorHandler)
+
+
+export const server = createServer(app);
