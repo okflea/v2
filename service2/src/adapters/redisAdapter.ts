@@ -1,12 +1,11 @@
-
+// adapters/redisAdapter.ts
 import { createAdapter } from '@socket.io/redis-adapter';
-import { createClient } from 'redis';
-
-const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+import { redisClient } from '../utils/redisClient';
 
 export const setupRedisAdapter = async () => {
-  const pubClient = createClient({ url: redisUrl });
-  const subClient = pubClient.duplicate();
+  // For pub/sub, create duplicates of the shared client
+  const pubClient = redisClient.duplicate();
+  const subClient = redisClient.duplicate();
 
   pubClient.on('error', (err) => {
     console.error('Redis pubClient error:', err);
@@ -16,6 +15,6 @@ export const setupRedisAdapter = async () => {
   });
 
   await Promise.all([pubClient.connect(), subClient.connect()]);
-  console.log('Redis connected');
+  console.log('Redis connected for Socket.IO adapter');
   return createAdapter(pubClient, subClient);
 };
