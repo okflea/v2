@@ -22,8 +22,8 @@ router.get('/', async (ctx) => {
   const message: DBMessage = {
     "operation": "GET",
     "collection": "User",
-    "data": { "name": "admin" },
-    "options": { "fields": ["name", "email"] },
+    "data": { "username": "admin" },
+    "options": { "fields": [] },
     "requestId": "req-0001",
     "timestamp": Date.now()
   }
@@ -35,5 +35,3 @@ router.get('/', async (ctx) => {
 });
 
 export default router;
-
-

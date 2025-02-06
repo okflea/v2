@@ -14,6 +14,7 @@ app.use(cookieParser())
 app.use(cors())
 
 
+
 app.get('/', (req: Request, res: Response) => {
     const response = {
         uptime: os.uptime(),
