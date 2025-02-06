@@ -22,6 +22,9 @@ export const handleSocketConnection = (io: Server) => {
     const serverIP = getServerIP();
     socket.emit('server-ip', serverIP);
 
+    console.log("Server IP:" + serverIP);
+    
+
     socket.on('message', (data) => {
       console.log(`Message received: ${data}`);
       socket.broadcast.emit('message', data);
