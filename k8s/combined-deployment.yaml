@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: combined-services
+  labels:
+    app: combined-services
+spec:
+  replicas: 2   # Adjust the number of replicas for horizontal scaling
+  selector:
+    matchLabels:
+      app: combined-services
+  template:
+    metadata:
+      labels:
+        app: combined-services
+    spec:
+      containers:
+        - name: service1
+          image: yourdockerhubusername/service1:latest
+          ports:
+            - name: service1-port
+              containerPort: 3001
+          # (Optional) Environment variables can be added here if needed.
+          # env:
+          #   - name: SOME_VAR
+          #     value: "value"
+        - name: service2
+          image: yourdockerhubusername/service2:latest
+          ports:
+            - name: service2-port
+              containerPort: 3002

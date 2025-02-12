@@ -1,0 +1,26 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /  # Used for rewriting paths (if needed)
+spec:
+  rules:
+    - host: yourdomain.com   # Replace with your actual domain name or testing domain (e.g., example.com)
+      http:
+        paths:
+          - path: /service1
+            pathType: Prefix
+            backend:
+              service:
+                name: service1
+                port:
+                  number: 3001
+          - path: /service2
+            pathType: Prefix
+            backend:
+              service:
+                name: service2
+                port:
+                  number: 3002

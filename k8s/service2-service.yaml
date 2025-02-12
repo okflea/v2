@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+spec:
+  selector:
+    app: combined-services
+  ports:
+    - protocol: TCP
+      port: 3002
+      targetPort: service2-port
+  type: ClusterIP
