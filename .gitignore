@@ -1,10 +1,8 @@
-
 # Node.js
 node_modules/
 
-/service1/node_modules/
-/service2/node_modules/
-
+/api_service/node_modules/
+/socket_service/node_modules/
 
 npm-debug.log
 yarn-error.log
@@ -12,8 +10,8 @@ yarn-error.log
 # TypeScript
 dist/
 
-/service1/dist/
-/service2/dist/
+/api_service/dist/
+/socket_service/dist/
 
 *.tsbuildinfo
 
@@ -31,10 +29,10 @@ yarn-error.log*
 .env
 .env.prod
 
-/service1/.env
-/service1/.env.prod
-/service2/.env
-/service2/.env.prod
+/api_service/.env
+/api_service/.env.prod
+/socket_service/.env
+/socket_service/.env.prod
 
 # Editor directories and files
 .idea/
